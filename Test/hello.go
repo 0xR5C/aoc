@@ -1,7 +1,7 @@
 package main
 
 import (
-	"aoc-2024/utils"
+	"aoc/utils"
 	"fmt"
 )
 
