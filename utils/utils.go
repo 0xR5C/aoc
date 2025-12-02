@@ -31,3 +31,7 @@ func AbsDiff(num1, num2 int) int {
 		return num2 - num1
 	}
 }
+
+func Mod(a, b int) int {
+	return (a%b + b) % b
+}
