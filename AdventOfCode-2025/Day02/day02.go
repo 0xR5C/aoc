@@ -53,7 +53,7 @@ func part1(input []string) {
 		utils.Check(err)
 		for num := begin; num <= end; num++ {
 			tempStr := strconv.Itoa(num)
-			if checkInvalid(tempStr) {
+			if checkInvalidPart1(tempStr) {
 				sum += num
 			}
 		}
@@ -63,16 +63,45 @@ func part1(input []string) {
 
 func part2(input []string) {
 	fmt.Print("Part2 ")
-	fmt.Println()
+	sum := 0
+
+	for _, r := range input {
+		ranges := strings.Split(r, "-")
+		begin, err := strconv.Atoi(ranges[0])
+		utils.Check(err)
+		end, err := strconv.Atoi(ranges[1])
+		utils.Check(err)
+		for num := begin; num <= end; num++ {
+			tempStr := strconv.Itoa(num)
+			if checkInvalidPart2(tempStr) {
+				sum += num
+			}
+		}
+	}
+
+	fmt.Println("Sum of invalid IDs is", sum)
 }
 
 // Helper Functions
 
 // returns true if id is invalid, else false
-func checkInvalid(id string) bool {
+func checkInvalidPart1(id string) bool {
 
 	substr1 := id[:len(id)/2]
 	substr2 := id[len(id)/2:]
 	return substr1 == substr2
 
+}
+
+func checkInvalidPart2(id string) bool {
+
+	for i := 0; i <= len(id)/2; i++ {
+		substr := id[:i+1]
+		count := strings.Count(id, substr)
+		if count >= 2 && len(substr)*count == len(id) {
+			return true
+		}
+	}
+
+	return false
 }
