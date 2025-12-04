@@ -35,3 +35,16 @@ func AbsDiff(num1, num2 int) int {
 func Mod(a, b int) int {
 	return (a%b + b) % b
 }
+
+func MaxRune(ar []rune) int {
+	if len(ar) == 0 {
+		return -1
+	}
+	max := 0
+	for i, v := range ar {
+		if ar[max] < v {
+			max = i
+		}
+	}
+	return max
+}
