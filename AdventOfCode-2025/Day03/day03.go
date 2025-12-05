@@ -63,5 +63,28 @@ func part1(input []string) {
 }
 
 func part2(input []string) {
+	fmt.Print("Part2 ")
 
+	sum := 0
+
+	for _, line := range input {
+		bank := []rune(line)
+		var digits []rune
+
+		// find maximum digit that has at least 11 digits before, then 10 etc.
+		for i := 12; i >= 1; i-- {
+			temp := bank[:len(bank)-i+1]
+			max := utils.MaxRune(temp)
+
+			digits = append(digits, bank[max])
+			bank = bank[max+1:]
+		}
+
+		numStr := string(digits)
+		num, err := strconv.Atoi(numStr)
+		utils.Check(err)
+		sum += num
+	}
+
+	fmt.Println("The sum of voltage is", sum)
 }
